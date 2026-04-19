@@ -24,6 +24,7 @@ export default function LazyImage({
   const sources = [
     src,
     fallbackSrc,
+    `https://images.unsplash.com/photo-1604654894610-df490c985507?auto=format&fit=crop&q=60&w=800`, // Universal nail fallback
     `https://picsum.photos/seed/${alt.replace(/\s+/g, '-').toLowerCase()}/800/800`,
     `https://picsum.photos/seed/nails-placeholder/800/800`
   ].filter(Boolean) as string[];
@@ -36,6 +37,18 @@ export default function LazyImage({
     setLoaded(false);
     setErrorCount(0);
   }, [src]);
+
+  // Safety timeout for each source attempt
+  useEffect(() => {
+    if (loaded || errorCount >= sources.length) return;
+
+    const timer = setTimeout(() => {
+      console.warn(`Image timed out: ${currentSrc}. Trying next.`);
+      setErrorCount(prev => prev + 1);
+    }, 8000); // 8 seconds per source
+
+    return () => clearTimeout(timer);
+  }, [currentSrc, loaded, errorCount, sources.length]);
 
   return (
     <div className={`relative overflow-hidden bg-muted w-full h-full group/img ${className}`}>

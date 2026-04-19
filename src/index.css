@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: "Noto Serif", serif;
+    --font-sans: "Manrope", sans-serif;
+    --font-serif: "Noto Serif", serif;
+    
+    --color-primary: #70585b;
+    --color-primary-foreground: #ffffff;
+    --color-primary-container: #fadadd;
+    --color-on-primary-container: #765e61;
+    
+    --color-secondary: #7b5459;
+    --color-secondary-foreground: #ffffff;
+    --color-secondary-container: #fecad0;
+    --color-on-secondary-container: #7a5358;
+    
+    --color-background: #fcf9f9;
+    --color-foreground: #1b1b1c;
+    
+    --color-muted: #f0eded;
+    --color-muted-foreground: #4f4445;
+    
+    --color-accent: #f6f3f3;
+    --color-accent-foreground: #70585b;
+    
+    --color-border: #d2c3c4;
+    --color-input: #d2c3c4;
+    --color-ring: #70585b;
+    
+    --radius-sm: 0.125rem;
+    --radius-md: 0.25rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+}
+
+:root {
+    --background: #fcf9f9;
+    --foreground: #1b1b1c;
+    --card: #ffffff;
+    --card-foreground: #1b1b1c;
+    --popover: #ffffff;
+    --popover-foreground: #1b1b1c;
+    --primary: #70585b;
+    --primary-foreground: #ffffff;
+    --secondary: #7b5459;
+    --secondary-foreground: #ffffff;
+    --muted: #f0eded;
+    --muted-foreground: #4f4445;
+    --accent: #f6f3f3;
+    --accent-foreground: #70585b;
+    --destructive: #ba1a1a;
+    --destructive-foreground: #ffffff;
+    --border: #d2c3c4;
+    --input: #d2c3c4;
+    --ring: #70585b;
+    --radius: 0.25rem;
+}
+
+.dark {
+    --background: #1b1b1c;
+    --foreground: #fcf9f9;
+    --card: #1b1b1c;
+    --card-foreground: #fcf9f9;
+    --popover: #1b1b1c;
+    --popover-foreground: #fcf9f9;
+    --primary: #debfc2;
+    --primary-foreground: #1b1b1c;
+    --secondary: #ecbabf;
+    --secondary-foreground: #1b1b1c;
+    --muted: #303031;
+    --muted-foreground: #eae7e7;
+    --accent: #303031;
+    --accent-foreground: #fcf9f9;
+    --destructive: #ffdad6;
+    --destructive-foreground: #93000a;
+    --border: #4f4445;
+    --input: #4f4445;
+    --ring: #debfc2;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+    }
+}
+
+.editorial-shadow {
+    box-shadow: 0 12px 40px rgba(112, 88, 91, 0.08);
+}
+
+.glass-panel {
+    @apply bg-white/80 backdrop-blur-xl;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

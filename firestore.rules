@@ -1,0 +1,138 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {userId} (Firebase Auth UID)
+    // Fields:
+    //   - uid: string (required) - The unique Firebase Auth ID.
+    //   - email: string (required, email format) - User email address.
+    //   - displayName: string (optional) - User's full name.
+    //   - role: string (required, enum: ['user', 'admin']) - User's role.
+    //   - points: number (optional) - Loyalty points.
+    //   - address: map (optional) - Shipping address.
+    //
+    // Collection: products
+    // Document ID: {productId}
+    // Fields:
+    //   - id: string (required)
+    //   - name: string (required)
+    //   - price: number (required)
+    //   - image: string (required, uri format)
+    //   - category: string (required)
+    //   - description: string (optional)
+    //   - isNew: boolean (optional)
+    //   - isLimited: boolean (optional)
+    //   - shape: string (optional)
+    //   - tags: list (optional)
+    //
+    // Collection: orders
+    // Document ID: {orderId}
+    // Fields:
+    //   - orderId: string (required)
+    //   - userId: string (required)
+    //   - items: list (required) - List of order items.
+    //   - total: number (required)
+    //   - status: string (required, enum: ['processing', 'shipped', 'delivered'])
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        ((exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', 'user') == 'admin') ||
+          (request.auth.token.email == "kushp756@gmail.com"));
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidUrl(url) {
+      return url is string && (url.matches("^https://.*") || url.matches("^http://.*"));
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+
+    function isValidUser(data) {
+      let allowedFields = ['uid', 'email', 'displayName', 'role', 'points', 'address', 'createdAt', 'photoURL', 'photoUrl', 'phoneNumber', 'emailVerified', 'authProvider'];
+      return data.keys().hasOnly(allowedFields) &&
+             (!('uid' in data) || data.uid == request.auth.uid) &&
+             (!('email' in data) || isValidEmail(data.email)) &&
+             (!('role' in data) || data.role in ['user', 'admin']) &&
+             (!('displayName' in data) || (data.displayName is string && data.displayName.size() < 100)) &&
+             (!('points' in data) || data.points is number) &&
+             (!('createdAt' in data) || data.createdAt is string) &&
+             (!('photoURL' in data) || (data.photoURL is string && data.photoURL.size() < 500)) &&
+             (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() < 20)) &&
+             (!('address' in data) || data.address is map) &&
+             (!('emailVerified' in data) || data.emailVerified is bool);
+    }
+
+    function isValidProduct(data) {
+      return data.keys().hasAll(['id', 'name', 'price', 'image', 'category']) &&
+             data.id is string &&
+             data.name is string && data.name.size() < 200 &&
+             data.price is number && data.price >= 0 &&
+             isValidUrl(data.image) &&
+             data.category is string &&
+             (!('tags' in data) || (data.tags is list && data.tags.size() < 20)) &&
+             data.keys().hasOnly(['id', 'name', 'price', 'image', 'category', 'description', 'isNew', 'isLimited', 'shape', 'tags']);
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['orderId', 'userId', 'items', 'total', 'status', 'createdAt', 'shippingInfo']) &&
+             data.orderId is string &&
+             (data.userId == request.auth.uid || data.userId == 'anonymous') &&
+             data.items is list && data.items.size() < 50 &&
+             data.total is number && data.total >= 0 &&
+             data.status in ['processing', 'shipped', 'delivered'] &&
+             data.createdAt is timestamp &&
+             data.shippingInfo is map &&
+             data.keys().hasOnly(['orderId', 'userId', 'items', 'total', 'status', 'createdAt', 'shippingInfo']);
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isValidUser(request.resource.data) && 
+                      (request.resource.data.get('role', 'user') == 'user' || isAdmin());
+      allow update: if isOwner(userId) && isValidUser(request.resource.data) && 
+                      (request.resource.data.get('role', 'user') == resource.data.get('role', 'user') || isAdmin());
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && isValidOrder(request.resource.data);
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+  }
+}

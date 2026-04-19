@@ -123,7 +123,7 @@ export default function ProductDetail() {
             <h1 className="text-5xl md:text-6xl font-serif italic leading-tight tracking-tighter">
               {product.name}
             </h1>
-            <p className="text-2xl font-light text-muted-foreground">${product.price.toFixed(2)}</p>
+            <p className="text-2xl font-light text-muted-foreground">₹{product.price.toLocaleString('en-IN')}</p>
           </header>
 
           <div className="space-y-6">

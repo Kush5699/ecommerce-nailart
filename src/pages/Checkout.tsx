@@ -258,7 +258,7 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">{item.category}</p>
                     <div className="flex justify-between items-center pt-2">
                       <span className="text-[10px] font-bold text-muted-foreground">QTY: {item.quantity}</span>
-                      <span className="font-serif text-lg">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-serif text-lg">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
                     </div>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ export default function Checkout() {
             <div className="space-y-4 pt-12 border-t border-border/20">
               <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="text-foreground">${total.toFixed(2)}</span>
+                <span className="text-foreground">₹{total.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold">
                 <span className="text-muted-foreground">Shipping</span>
@@ -276,11 +276,11 @@ export default function Checkout() {
               </div>
               <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold">
                 <span className="text-muted-foreground">Taxes (8%)</span>
-                <span className="text-foreground">${(total * 0.08).toFixed(2)}</span>
+                <span className="text-foreground">₹{(total * 0.08).toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-3xl font-serif pt-8 border-t border-border/40 italic">
                 <span>Total</span>
-                <span className="text-primary">${(total * 1.08).toFixed(2)}</span>
+                <span className="text-primary">₹{(total * 1.08).toLocaleString('en-IN')}</span>
               </div>
             </div>
 
@@ -337,9 +337,9 @@ export default function Checkout() {
                       transactionInfo: {
                         totalPriceStatus: 'FINAL',
                         totalPriceLabel: 'Total',
-                        totalPrice: (total * 1.08).toFixed(2),
-                        currencyCode: 'USD',
-                        countryCode: 'US',
+                        totalPrice: (total * 1.08).toFixed(0),
+                        currencyCode: 'INR',
+                        countryCode: 'IN',
                       },
                     }}
                     onLoadPaymentData={paymentRequest => {

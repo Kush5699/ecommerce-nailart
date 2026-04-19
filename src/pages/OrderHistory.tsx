@@ -130,7 +130,7 @@ export default function OrderHistory() {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8 pt-10 border-t border-border/20">
                 <div>
                   <span className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold mb-2 block">Investment</span>
-                  <p className="text-3xl font-serif text-primary italic">${order.total.toFixed(2)}</p>
+                  <p className="text-3xl font-serif text-primary italic">₹{order.total.toLocaleString('en-IN')}</p>
                 </div>
                 <Button className="bg-primary text-on-primary rounded-none px-12 py-6 text-[10px] uppercase tracking-[0.3em] font-bold shadow-xl hover:bg-primary/90">
                   View Details

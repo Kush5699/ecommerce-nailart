@@ -55,7 +55,7 @@ export default function Cart() {
                       <span className="text-[10px] uppercase tracking-[0.2em] text-primary mb-2 block font-bold">{item.category}</span>
                       <h3 className="text-2xl font-serif leading-tight mb-2">{item.name}</h3>
                     </div>
-                    <span className="text-xl font-serif">${(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="text-xl font-serif">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex items-center gap-4 mt-4">
                     <Badge className="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] uppercase tracking-widest border-none">Hand-painted</Badge>
@@ -96,7 +96,7 @@ export default function Cart() {
             <div className="space-y-4 mb-8">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-medium">${total.toFixed(2)}</span>
+                <span className="font-medium">₹{total.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Artisan Shipping</span>
@@ -104,15 +104,15 @@ export default function Cart() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Estimated Taxes</span>
-                <span className="font-medium">${(total * 0.08).toFixed(2)}</span>
+                <span className="font-medium">₹{(total * 0.08).toLocaleString('en-IN')}</span>
               </div>
             </div>
             
             <div className="flex justify-between items-end border-t border-border/40 pt-6 mb-10">
               <span className="font-serif text-lg italic">Total</span>
               <div className="text-right">
-                <span className="text-3xl font-serif text-primary">${(total * 1.08).toFixed(2)}</span>
-                <p className="text-[10px] text-muted-foreground uppercase mt-1 tracking-widest">USD</p>
+                <span className="text-3xl font-serif text-primary">₹{(total * 1.08).toLocaleString('en-IN')}</span>
+                <p className="text-[10px] text-muted-foreground uppercase mt-1 tracking-widest">INR</p>
               </div>
             </div>
 

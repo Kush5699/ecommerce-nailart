@@ -63,7 +63,7 @@ export default function ProductCard({ id, name, price, image, category, isNew, i
           <h4 className="font-serif text-lg text-foreground group-hover:text-primary transition-colors">{name}</h4>
           <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">{category}</p>
         </div>
-        <span className="font-medium text-primary">${price.toFixed(2)}</span>
+        <span className="font-medium text-primary">₹{price.toLocaleString('en-IN')}</span>
       </div>
     </motion.div>
   );

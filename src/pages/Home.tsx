@@ -124,8 +124,8 @@ export default function Home() {
               <Badge className="bg-secondary-container text-on-secondary-container rounded-full text-[8px] uppercase font-bold px-3 py-1">Flash Sale</Badge>
               <h3 className="text-2xl font-serif">The Ghost Set</h3>
               <div className="flex items-baseline gap-3">
-                <span className="text-2xl font-bold text-primary">$42.00</span>
-                <span className="text-sm text-muted-foreground line-through">$68.00</span>
+                <span className="text-2xl font-bold text-primary">₹2,899</span>
+                <span className="text-sm text-muted-foreground line-through">₹4,999</span>
               </div>
               <div className="space-y-2 pt-4">
                 <div className="flex justify-between text-[8px] uppercase tracking-widest font-bold text-muted-foreground">
@@ -161,8 +161,8 @@ export default function Home() {
               <Badge className="bg-secondary-container text-on-secondary-container rounded-full text-[8px] uppercase font-bold px-3 py-1">Daily Pick</Badge>
               <h3 className="text-2xl font-serif">Artisan Tool Set</h3>
               <div className="flex items-baseline gap-3">
-                <span className="text-2xl font-bold text-primary">$89.00</span>
-                <span className="text-sm text-muted-foreground line-through">$125.00</span>
+                <span className="text-2xl font-bold text-primary">₹8,999</span>
+                <span className="text-sm text-muted-foreground line-through">₹12,499</span>
               </div>
               <div className="space-y-2 pt-4">
                 <div className="flex justify-between text-[8px] uppercase tracking-widest font-bold text-muted-foreground">

@@ -193,10 +193,10 @@ export default function AdminDashboard() {
   const totalRevenue = orders.reduce((acc, order) => acc + (order.total || 0), 0);
 
   const stats = [
-    { label: 'Total Revenue', value: `$${totalRevenue.toFixed(2)}`, icon: TrendingUp, color: 'text-emerald-600' },
+    { label: 'Total Revenue', value: `₹${totalRevenue.toLocaleString('en-IN')}`, icon: TrendingUp, color: 'text-emerald-600' },
     { label: 'Total Orders', value: orders.length, icon: ShoppingBag, color: 'text-blue-600' },
     { label: 'Active Curators', value: usersCount, icon: Users, color: 'text-purple-600' },
-    { label: 'Avg. Order Value', value: `$${(totalRevenue / (orders.length || 1)).toFixed(2)}`, icon: LayoutDashboard, color: 'text-amber-600' },
+    { label: 'Avg. Order Value', value: `₹${(totalRevenue / (orders.length || 1)).toLocaleString('en-IN')}`, icon: LayoutDashboard, color: 'text-amber-600' },
   ];
 
   return (
@@ -314,7 +314,7 @@ export default function AdminDashboard() {
                                 {order.status}
                               </Badge>
                             </td>
-                            <td className="px-8 py-6 font-serif italic">${(order.total || 0).toFixed(2)}</td>
+                            <td className="px-8 py-6 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -395,7 +395,7 @@ export default function AdminDashboard() {
                       <h3 className="font-serif italic text-lg mb-1">{product.name}</h3>
                       <div className="flex justify-between items-center">
                         <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{product.category}</span>
-                        <span className="font-bold text-primary">${product.price.toFixed(2)}</span>
+                        <span className="font-bold text-primary">₹{product.price.toLocaleString('en-IN')}</span>
                       </div>
                     </div>
                   </div>
@@ -440,7 +440,7 @@ export default function AdminDashboard() {
                             <option value="delivered">Delivered</option>
                           </select>
                         </td>
-                        <td className="px-8 py-6 font-serif italic">${(order.total || 0).toFixed(2)}</td>
+                        <td className="px-8 py-6 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
                         <td className="px-8 py-6 text-xs text-muted-foreground">
                           {order.createdAt?.toDate ? order.createdAt.toDate().toLocaleDateString() : 'Recent'}
                         </td>
@@ -488,7 +488,7 @@ export default function AdminDashboard() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Price ($)</label>
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Price (₹)</label>
                     <Input 
                       type="number"
                       value={productForm.price}

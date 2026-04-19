@@ -92,21 +92,20 @@ export const products: Product[] = [
   },
   {
     id: '9',
+    name: 'Emerald Sea',
+    price: 1899,
+    image: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=800&exp=-10',
+    category: 'gels',
+    description: 'Deep emerald green velvet finish with a subtle magnetic shimmer.',
+    tags: ['Velvet', 'Magnetic']
+  },
+  {
+    id: '10',
     name: 'Liquid Gold Liner',
     price: 1299,
     image: 'https://images.unsplash.com/photo-1526045612212-70caf35c117f?auto=format&fit=crop&q=80&w=800',
     category: 'gels',
-    description: 'Ultra-high pigment metallic gold gel. Perfect for precision line work and architectural accents.',
-    tags: ['Metallic', 'Precision', 'Professional']
-  },
-  {
-    id: '10',
-    name: 'Glass Skin Glaze',
-    price: 1199,
-    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800',
-    category: 'gels',
-    description: 'A revolutionary high-gloss top coat that provides a "wet look" finish with extreme durability.',
-    isNew: true,
-    tags: ['High Shine', 'Long-wear', 'Vegan']
+    description: 'Ultra-high pigment metallic gold gel. Perfect for precision line work.',
+    tags: ['Metallic', 'Precision']
   }
 ];

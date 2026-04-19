@@ -8,7 +8,7 @@ export default function Story() {
       <section className="relative h-[80vh] flex items-center justify-center bg-muted/20">
         <div className="absolute inset-0 overflow-hidden">
           <LazyImage 
-            src="https://picsum.photos/seed/storyatelier/1200/1200" 
+            src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&q=80&w=1200" 
             alt="Atelier" 
             className="opacity-40 grayscale"
           />
@@ -65,7 +65,7 @@ export default function Story() {
           <div className="relative">
             <div className="aspect-[3/4] bg-muted overflow-hidden shadow-2xl">
               <LazyImage 
-                src="https://picsum.photos/seed/storyprocess/800/800" 
+                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" 
                 alt="Process" 
               />
             </div>

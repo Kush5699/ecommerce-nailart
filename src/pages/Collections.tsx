@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import ProductCard from '@/src/components/product/ProductCard';
 import { db } from '@/src/lib/firebase';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { products as initialProducts } from '@/src/data/products';
 
 export default function Collections() {
   const { category } = useParams<{ category: string }>();
@@ -27,6 +28,12 @@ export default function Collections() {
 
     return () => unsubscribe();
   }, [category]);
+
+  const displayProducts = filteredProducts.length > 0 ? filteredProducts : initialProducts.filter(p => {
+    if (category === 'trending') return p.isLimited;
+    if (category) return p.category === category;
+    return true;
+  });
 
   const categoryTitles: Record<string, string> = {
     'trending': 'Trending Now',
@@ -71,7 +78,7 @@ export default function Collections() {
       </header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-20">
-        {filteredProducts.map((product: any) => (
+        {displayProducts.map((product: any) => (
           <ProductCard 
             key={product.id} 
             {...product}
@@ -79,7 +86,7 @@ export default function Collections() {
         ))}
       </div>
 
-      {filteredProducts.length === 0 && (
+      {displayProducts.length === 0 && (
         <div className="py-40 text-center">
           <p className="text-muted-foreground font-serif italic text-2xl">Coming soon to the atelier.</p>
         </div>

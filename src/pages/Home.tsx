@@ -34,6 +34,8 @@ export default function Home() {
     }
   };
 
+  const displayProducts = trendingProducts.length > 0 ? trendingProducts : initialProducts.slice(0, 4);
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -41,7 +43,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 w-full h-full">
           <div className="col-span-1 lg:col-span-7 relative overflow-hidden">
             <LazyImage 
-              src="https://images.unsplash.com/photo-1604654894610-df490c985507?auto=format&fit=crop&q=80&w=1200" 
+              src="https://picsum.photos/seed/nailhero/1200/1200" 
               alt="Hero Nail Art"
               className="w-full h-full"
             />
@@ -113,7 +115,7 @@ export default function Home() {
           >
             <div className="w-full md:w-1/2 aspect-square overflow-hidden">
               <LazyImage 
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" 
+                src="https://picsum.photos/seed/nailghost/800/800" 
                 alt="Flash Sale" 
                 className="group-hover:scale-105 transition-transform duration-700"
               />
@@ -150,7 +152,7 @@ export default function Home() {
           >
             <div className="w-full md:w-1/2 aspect-square overflow-hidden">
               <LazyImage 
-                src="https://images.unsplash.com/photo-1599948633231-163690680695?auto=format&fit=crop&q=80&w=800" 
+                src="https://picsum.photos/seed/nailtools/800/800" 
                 alt="Daily Pick" 
                 className="group-hover:scale-105 transition-transform duration-700"
               />
@@ -188,9 +190,9 @@ export default function Home() {
           <h2 className="text-5xl font-serif text-center mb-24">Curated Collections</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { title: 'Press-ons', subtitle: "Featuring Monica's Way", img: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=800', count: '24 Styles', href: '/collections/press-ons' },
-              { title: 'Gel Polishes', subtitle: 'The Pro-Finish Series', img: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=800', count: '112 Tones', offset: true, href: '/collections/gels' },
-              { title: 'Nail Care', subtitle: 'Nourish & Restore', img: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&q=80&w=800', count: 'Essential Rituals', href: '/collections/tools' }
+              { title: 'Press-ons', subtitle: "Featuring Monica's Way", img: 'https://picsum.photos/seed/cat1/800/800', count: '24 Styles', href: '/collections/press-ons' },
+              { title: 'Gel Polishes', subtitle: 'The Pro-Finish Series', img: 'https://picsum.photos/seed/cat2/800/800', count: '112 Tones', offset: true, href: '/collections/gels' },
+              { title: 'Nail Care', subtitle: 'Nourish & Restore', img: 'https://picsum.photos/seed/cat3/800/800', count: 'Essential Rituals', href: '/collections/tools' }
             ].map((cat, i) => (
               <motion.div 
                 key={i}
@@ -227,7 +229,7 @@ export default function Home() {
           <div className="w-24 h-[1px] bg-primary/30 mx-auto"></div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-20">
-          {trendingProducts.map((product: any) => (
+          {displayProducts.map((product: any) => (
             <ProductCard 
               key={product.id} 
               {...product}
@@ -252,9 +254,9 @@ export default function Home() {
           </div>
           <div className="flex gap-10 overflow-x-auto pb-12 snap-x no-scrollbar">
             {[
-              { name: 'Elena A.', text: "Absolutely stunned by the quality. They stayed on for 2 weeks straight and looked like a salon visit!", img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=400' },
-              { name: 'Jessica S.', text: "The Opaline kit is a game changer. The finish is so multi-dimensional, I get compliments everywhere.", img: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=400' },
-              { name: 'Maria L.', text: "Luxury at its finest. The packaging alone makes it feel like a gift every time I order.", img: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=400' }
+              { name: 'Elena A.', text: "Absolutely stunned by the quality. They stayed on for 2 weeks straight and looked like a salon visit!", img: 'https://picsum.photos/seed/rev1/400/400' },
+              { name: 'Jessica S.', text: "The Opaline kit is a game changer. The finish is so multi-dimensional, I get compliments everywhere.", img: 'https://picsum.photos/seed/rev2/400/400' },
+              { name: 'Maria L.', text: "Luxury at its finest. The packaging alone makes it feel like a gift every time I order.", img: 'https://picsum.photos/seed/rev3/400/400' }
             ].map((rev, i) => (
               <div key={i} className="min-w-[350px] snap-start bg-background p-8 shadow-sm">
                 <div className="aspect-square rounded-none overflow-hidden mb-8">

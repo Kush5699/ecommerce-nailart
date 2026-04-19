@@ -8,6 +8,7 @@ import { Minus, Plus, Share2, Heart } from 'lucide-react';
 import { db } from '@/src/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import LazyImage from '@/src/components/common/LazyImage';
+import { products as initialProducts } from '@/src/data/products';
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -19,10 +20,21 @@ export default function ProductDetail() {
   useEffect(() => {
     if (!id) return;
     const fetchProduct = async () => {
-      const docRef = doc(db, 'products', id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setProduct({ id: docSnap.id, ...docSnap.data() });
+      try {
+        const docRef = doc(db, 'products', id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setProduct({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          // Fallback to initial data
+          const fallback = initialProducts.find(p => p.id === id);
+          if (fallback) setProduct(fallback);
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        // Fallback to initial data on error
+        const fallback = initialProducts.find(p => p.id === id);
+        if (fallback) setProduct(fallback);
       }
       setLoading(false);
     };

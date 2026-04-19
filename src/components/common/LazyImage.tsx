@@ -1,82 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string;
+  alt: string;
+  className?: string; // Applied to container
+  imgClassName?: string; // Applied to img tag
   fallbackSrc?: string;
 }
 
-export default function LazyImage({ src, alt, className, fallbackSrc, ...props }: LazyImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(false);
+export default function LazyImage({ 
+  src, 
+  alt, 
+  className = '', 
+  imgClassName = '', 
+  fallbackSrc, 
+  ...props 
+}: LazyImageProps) {
+  const [loaded, setLoaded] = useState(false);
+  const [errorCount, setErrorCount] = useState(0);
 
-  React.useEffect(() => {
-    // Reset state when src changes
-    setIsLoaded(false);
-    setError(false);
+  // Define a chain of sources to try in order
+  const sources = [
+    src,
+    fallbackSrc,
+    `https://picsum.photos/seed/${alt.replace(/\s+/g, '-').toLowerCase()}/800/800`,
+    `https://picsum.photos/seed/nails-placeholder/800/800`
+  ].filter(Boolean) as string[];
 
-    if (!src) {
-      setError(true);
-      setIsLoaded(true);
-      return;
-    }
+  // Select the current source based on how many errors we've hit
+  const currentSrc = errorCount < sources.length ? sources[errorCount] : '';
 
-    const img = new Image();
-    img.src = src;
-    img.onload = () => setIsLoaded(true);
-    img.onerror = () => {
-      setError(true);
-      setIsLoaded(true);
-    };
-
-    // Fail-safe timeout
-    const timer = setTimeout(() => {
-      if (!isLoaded) {
-        setError(true);
-        setIsLoaded(true);
-      }
-    }, 6000);
-
-    return () => {
-      clearTimeout(timer);
-      img.onload = null;
-      img.onerror = null;
-    };
+  // Reset if the primary src changes
+  useEffect(() => {
+    setLoaded(false);
+    setErrorCount(0);
   }, [src]);
-
-  // High-reliability fallbacks
-  const placeholder = fallbackSrc || `https://images.unsplash.com/photo-1604654894610-df490c985507?auto=format&fit=crop&q=80&w=800`;
 
   return (
     <div className={`relative overflow-hidden bg-muted w-full h-full group/img ${className}`}>
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
+
       <AnimatePresence>
-        {!isLoaded && (
+        {!loaded && errorCount < sources.length && (
           <motion.div 
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-muted/50 backdrop-blur-sm z-20"
+            className="absolute inset-0 flex items-center justify-center bg-muted/30 backdrop-blur-[2px] z-20"
           >
-            <div className="w-5 h-5 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-primary/10 border-t-primary rounded-full animate-spin" />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Actual Image */}
-      <motion.img
-        src={error ? placeholder : src}
-        alt={alt}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-        referrerPolicy="no-referrer"
-        {...(props as any)}
-      />
+      {errorCount < sources.length ? (
+        <motion.img
+          key={currentSrc} // Key forces re-render/re-load on src change
+          src={currentSrc}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          onError={() => setErrorCount(prev => prev + 1)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: loaded ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+          className={`absolute inset-0 w-full h-full object-cover z-10 ${imgClassName}`}
+          referrerPolicy="no-referrer"
+          {...(props as any)}
+        />
+      ) : (
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-muted text-center z-10">
+          <div className="w-10 h-[1px] bg-primary/20 mb-4" />
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/30 italic">
+            Atelier Asset
+          </span>
+        </div>
+      )}
 
-      {/* Fallback Overlay if error occurred (Text-based fallback) */}
-      {error && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-muted/20 text-center z-10">
-          <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground/40 mb-2">Image unavailable</span>
-          <p className="text-[8px] uppercase tracking-tighter text-muted-foreground/20 leading-tight line-clamp-2">{alt}</p>
+      {/* Admin indicator if using fallback */}
+      {errorCount > 0 && errorCount < sources.length && (
+        <div className="absolute top-2 right-2 z-30 pointer-events-none">
+          <span className="text-[6px] uppercase tracking-widest font-bold text-white bg-black/10 px-2 py-0.5 rounded-full backdrop-blur-sm">
+            Optimized
+          </span>
         </div>
       )}
     </div>

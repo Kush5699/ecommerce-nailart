@@ -115,18 +115,18 @@ export default function Checkout() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         {/* Checkout Form */}
         <div className="lg:col-span-7 space-y-16">
-          <section>
+          <section className="space-y-4">
             <span className="text-[10px] uppercase tracking-[0.4em] text-primary font-bold mb-4 block">Final Stage</span>
-            <h1 className="text-6xl font-serif italic tracking-tighter">Checkout</h1>
+            <h1 className="text-4xl md:text-6xl font-serif italic tracking-tighter">Checkout</h1>
           </section>
 
           {/* Shipping Information */}
-          <section className="space-y-10">
+          <section className="space-y-8 md:space-y-10">
             <div className="flex items-center gap-4">
-              <span className="w-10 h-10 rounded-none bg-primary text-on-primary flex items-center justify-center font-serif text-lg">01</span>
-              <h2 className="text-2xl font-serif italic">Shipping Information</h2>
+              <span className="w-8 h-8 md:w-10 md:h-10 rounded-none bg-primary text-on-primary flex items-center justify-center font-serif text-base md:text-lg">01</span>
+              <h2 className="text-xl md:text-2xl font-serif italic">Shipping Information</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-6 md:gap-y-10">
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">First Name</label>
                 <Input 
@@ -176,12 +176,12 @@ export default function Checkout() {
           </section>
 
           {/* Payment Details */}
-          <section className="space-y-10">
+          <section className="space-y-8 md:space-y-10">
             <div className="flex items-center gap-4">
-              <span className="w-10 h-10 rounded-none bg-primary text-on-primary flex items-center justify-center font-serif text-lg">02</span>
-              <h2 className="text-2xl font-serif italic">Payment Details</h2>
+              <span className="w-8 h-8 md:w-10 md:h-10 rounded-none bg-primary text-on-primary flex items-center justify-center font-serif text-base md:text-lg">02</span>
+              <h2 className="text-xl md:text-2xl font-serif italic">Payment Details</h2>
             </div>
-            <div className="p-12 bg-muted/20 border border-border/5 space-y-10 shadow-sm">
+            <div className="p-6 md:p-12 bg-muted/20 border border-border/5 space-y-8 md:space-y-10 shadow-sm">
               <div className="flex justify-between items-center mb-4">
                 <div className="flex gap-4 text-muted-foreground">
                   <CreditCard className="w-6 h-6" />
@@ -198,7 +198,7 @@ export default function Checkout() {
                   placeholder="0000 0000 0000 0000" 
                 />
               </div>
-              <div className="grid grid-cols-2 gap-12">
+              <div className="grid grid-cols-2 gap-6 md:gap-12">
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Expiry Date</label>
                   <Input 
@@ -244,8 +244,8 @@ export default function Checkout() {
 
         {/* Order Summary Sidebar */}
         <div className="lg:col-span-5 lg:sticky lg:top-32">
-          <div className="bg-background p-12 shadow-2xl border border-border/10 space-y-12">
-            <h2 className="text-4xl font-serif italic tracking-tight">Order Summary</h2>
+          <div className="bg-background p-6 md:p-12 shadow-2xl border border-border/10 space-y-12">
+            <h2 className="text-3xl md:text-4xl font-serif italic tracking-tight">Order Summary</h2>
             
             <div className="space-y-8 max-h-[40vh] overflow-y-auto pr-4 custom-scrollbar">
               {cart.map((item) => (

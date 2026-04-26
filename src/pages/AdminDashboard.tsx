@@ -202,15 +202,15 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-muted/10 pb-20">
       <div className="max-w-screen-2xl mx-auto px-6 md:px-12 py-12">
-        <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <header className="mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div>
             <span className="text-[10px] uppercase tracking-[0.4em] text-primary font-bold mb-4 block">Management Console</span>
-            <h1 className="text-5xl md:text-6xl font-serif italic tracking-tighter text-foreground">Admin Dashboard</h1>
+            <h1 className="text-4xl md:text-6xl font-serif italic tracking-tighter text-foreground">Admin Dashboard</h1>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <button 
               onClick={handleSeedDatabase}
-              className="flex items-center gap-2 px-6 py-3 bg-background border border-border/40 text-[10px] uppercase tracking-widest font-bold hover:bg-destructive hover:text-destructive-foreground transition-all"
+              className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-background border border-border/40 text-[10px] uppercase tracking-widest font-bold hover:bg-destructive hover:text-destructive-foreground transition-all"
               title="Wipe existing products and seed with defaults"
             >
               <Database className="w-4 h-4" />
@@ -222,7 +222,7 @@ export default function AdminDashboard() {
                 setEditingProduct(null);
                 setProductForm({ name: '', price: 0, category: 'press-ons', image: '', description: '', isNew: false, isLimited: false, tags: '' });
               }}
-              className="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary text-[10px] uppercase tracking-widest font-bold shadow-lg hover:bg-primary/90 transition-all"
+              className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-primary text-on-primary text-[10px] uppercase tracking-widest font-bold shadow-lg hover:bg-primary/90 transition-all"
             >
               <Plus className="w-4 h-4" />
               Add Product
@@ -296,25 +296,25 @@ export default function AdminDashboard() {
                 {/* Recent Orders Table (Simplified for Overview) */}
                 <div className="lg:col-span-8 space-y-8">
                   <h2 className="text-2xl font-serif italic">Recent Acquisitions</h2>
-                  <div className="bg-background border border-border/10 shadow-sm overflow-hidden">
-                    <table className="w-full text-left border-collapse">
+                  <div className="bg-background border border-border/10 shadow-sm overflow-x-auto">
+                    <table className="w-full text-left border-collapse min-w-[500px]">
                       <thead>
                         <tr className="bg-muted/30 border-b border-border/10">
-                          <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Order ID</th>
-                          <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Status</th>
-                          <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Amount</th>
+                          <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground whitespace-nowrap">Order ID</th>
+                          <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground whitespace-nowrap">Status</th>
+                          <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground whitespace-nowrap">Amount</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-border/10">
                         {orders.slice(0, 5).map((order) => (
                           <tr key={order.id} className="hover:bg-muted/5 transition-colors">
-                            <td className="px-8 py-6 font-mono text-xs text-muted-foreground">#{order.id.slice(0, 8).toUpperCase()}</td>
-                            <td className="px-8 py-6">
+                            <td className="px-6 py-5 font-mono text-xs text-muted-foreground">#{order.id.slice(0, 8).toUpperCase()}</td>
+                            <td className="px-6 py-5">
                               <Badge variant="outline" className="rounded-none text-[8px] uppercase tracking-widest px-2 py-0.5 border-primary/20 text-primary">
                                 {order.status}
                               </Badge>
                             </td>
-                            <td className="px-8 py-6 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
+                            <td className="px-6 py-5 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -411,23 +411,23 @@ export default function AdminDashboard() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className="bg-background border border-border/10 shadow-sm overflow-hidden">
-                <table className="w-full text-left border-collapse">
+              <div className="bg-background border border-border/10 shadow-sm overflow-x-auto">
+                <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
                     <tr className="bg-muted/30 border-b border-border/10">
-                      <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Order ID</th>
-                      <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Customer</th>
-                      <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Status</th>
-                      <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Amount</th>
-                      <th className="px-8 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Date</th>
+                      <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Order ID</th>
+                      <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Customer</th>
+                      <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Status</th>
+                      <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Amount</th>
+                      <th className="px-6 py-4 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Date</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/10">
                     {orders.map((order) => (
                       <tr key={order.id} className="hover:bg-muted/5 transition-colors">
-                        <td className="px-8 py-6 font-mono text-xs text-muted-foreground">#{order.id.slice(0, 8).toUpperCase()}</td>
-                        <td className="px-8 py-6 text-sm">{order.userId === 'anonymous' ? 'Guest' : 'Curator'}</td>
-                        <td className="px-8 py-6">
+                        <td className="px-6 py-6 font-mono text-xs text-muted-foreground">#{order.id.slice(0, 8).toUpperCase()}</td>
+                        <td className="px-6 py-6 text-sm">{order.userId === 'anonymous' ? 'Guest' : 'Curator'}</td>
+                        <td className="px-6 py-6">
                           <select 
                             value={order.status}
                             onChange={async (e) => {
@@ -440,8 +440,8 @@ export default function AdminDashboard() {
                             <option value="delivered">Delivered</option>
                           </select>
                         </td>
-                        <td className="px-8 py-6 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
-                        <td className="px-8 py-6 text-xs text-muted-foreground">
+                        <td className="px-6 py-6 font-serif italic">₹{(order.total || 0).toLocaleString('en-IN')}</td>
+                        <td className="px-6 py-6 text-xs text-muted-foreground">
                           {order.createdAt?.toDate ? order.createdAt.toDate().toLocaleDateString() : 'Recent'}
                         </td>
                       </tr>
@@ -465,12 +465,12 @@ export default function AdminDashboard() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              className="relative w-full max-w-2xl bg-background border border-border/10 shadow-2xl p-12 overflow-y-auto max-h-[90vh]"
+              className="relative w-full max-w-2xl bg-background border border-border/10 shadow-2xl p-6 md:p-12 overflow-y-auto max-h-[90vh]"
             >
-              <div className="flex justify-between items-start mb-12">
+              <div className="flex justify-between items-start mb-8 md:mb-12">
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.4em] text-primary font-bold mb-4 block">Inventory Management</span>
-                  <h2 className="text-4xl font-serif italic">{editingProduct ? 'Edit Masterpiece' : 'Add New Creation'}</h2>
+                  <h2 className="text-3xl md:text-4xl font-serif italic">{editingProduct ? 'Edit Masterpiece' : 'Add New Creation'}</h2>
                 </div>
                 <button onClick={() => setIsAddingProduct(false)} className="p-2 hover:bg-muted/30 transition-colors">
                   <X className="w-6 h-6" />

@@ -25,9 +25,9 @@ export default function Cart() {
 
   return (
     <div className="max-w-screen-2xl mx-auto px-6 md:px-12 py-20">
-      <header className="mb-20">
-        <h1 className="text-5xl md:text-6xl font-serif tracking-tight text-foreground mb-4">Your Curated Collection</h1>
-        <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">Review your selections before they are prepared for delivery.</p>
+      <header className="mb-12 md:mb-20">
+        <h1 className="text-4xl md:text-6xl font-serif tracking-tight text-foreground mb-4">Your Curated Collection</h1>
+        <p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">Review your selections before they are prepared for delivery.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">

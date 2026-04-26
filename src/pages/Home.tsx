@@ -51,7 +51,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-primary/5"></div>
           </div>
-          <div className="col-span-1 lg:col-span-5 flex flex-col justify-center px-12 lg:px-24 bg-background z-10">
+          <div className="col-span-1 lg:col-span-5 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 lg:py-0 bg-background z-10">
             <motion.span 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -64,7 +64,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-6xl md:text-8xl font-serif text-foreground leading-[0.9] -ml-12 md:-ml-24 drop-shadow-sm"
+              className="text-5xl md:text-6xl lg:text-8xl font-serif text-foreground leading-[0.9] lg:-ml-24 drop-shadow-sm"
             >
               The Tactile <br/><i className="font-normal italic">Ethereal</i>
             </motion.h1>
@@ -72,7 +72,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="mt-10 text-muted-foreground max-w-sm leading-relaxed text-lg"
+              className="mt-10 text-muted-foreground max-w-sm leading-relaxed text-base md:text-lg"
             >
               A curated selection of hand-crafted press-ons and artisan gels designed for the modern curator. Artistry at your fingertips.
             </motion.p>
@@ -93,16 +93,16 @@ export default function Home() {
       </section>
 
       {/* Deals of the Day */}
-      <section className="py-32 px-6 md:px-12 max-w-screen-2xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-border/40 pb-10">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">Deals of the Day</h2>
+      <section className="py-20 md:py-32 px-6 md:px-12 max-w-screen-2xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 border-b border-border/40 pb-10">
+          <div className="mb-8 md:mb-0">
+            <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-4">Deals of the Day</h2>
             <p className="text-muted-foreground uppercase tracking-widest text-[10px] font-bold">Limited editions ending soon</p>
           </div>
-          <div className="flex gap-4 mt-8 md:mt-0">
+          <div className="flex gap-2 md:gap-4">
             {['08', '42', '15'].map((val, i) => (
-              <div key={i} className="bg-primary-container text-on-primary-container px-6 py-3 flex flex-col items-center min-w-[80px]">
-                <span className="text-2xl font-bold">{val}</span>
+              <div key={i} className="bg-primary-container text-on-primary-container px-4 md:px-6 py-2 md:py-3 flex flex-col items-center min-w-[60px] md:min-w-[80px]">
+                <span className="text-xl md:text-2xl font-bold">{val}</span>
                 <span className="text-[8px] uppercase tracking-widest font-bold">{['Hrs', 'Min', 'Sec'][i]}</span>
               </div>
             ))}
@@ -254,13 +254,13 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="flex gap-10 overflow-x-auto pb-12 snap-x no-scrollbar">
+          <div className="flex gap-6 md:gap-10 overflow-x-auto pb-12 snap-x no-scrollbar px-2">
             {[
               { name: 'Elena A.', text: "Absolutely stunned by the quality. They stayed on for 2 weeks straight and looked like a salon visit!", img: 'https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&q=80&w=400' },
               { name: 'Jessica S.', text: "The Opaline kit is a game changer. The finish is so multi-dimensional, I get compliments everywhere.", img: 'https://images.unsplash.com/photo-1604654894610-df490c985507?auto=format&fit=crop&q=80&w=400' },
               { name: 'Maria L.', text: "Luxury at its finest. The packaging alone makes it feel like a gift every time I order.", img: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&q=80&w=400' }
             ].map((rev, i) => (
-              <div key={i} className="min-w-[350px] snap-start bg-background p-8 shadow-sm">
+              <div key={i} className="min-w-[280px] sm:min-w-[350px] snap-start bg-background p-6 md:p-8 shadow-sm">
                 <div className="aspect-square rounded-none overflow-hidden mb-8">
                   <LazyImage src={rev.img} alt={rev.name} />
                 </div>

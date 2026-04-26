@@ -72,17 +72,46 @@ export default function Navbar() {
               <SheetTrigger render={<Button variant="ghost" size="icon" className="text-primary" />}>
                 <Menu className="w-6 h-6" />
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background">
-                <div className="flex flex-col gap-8 mt-12">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className="text-lg font-serif italic text-primary"
-                    >
-                      {link.name}
+              <SheetContent side="right" className="bg-background w-[80%] p-0">
+                <div className="flex flex-col h-full">
+                  <div className="p-8 border-b border-border/10">
+                    <Link to="/" className="text-2xl font-serif italic text-primary">Luxe Nail Art</Link>
+                  </div>
+                  <div className="flex-1 overflow-y-auto p-8 space-y-8">
+                    <div className="space-y-6">
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Collections</p>
+                      <div className="flex flex-col gap-6">
+                        {navLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            to={link.href}
+                            className="text-2xl font-serif italic text-primary hover:translate-x-2 transition-transform"
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="pt-8 border-t border-border/10">
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground mb-6">Search</p>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                        <input
+                          type="text"
+                          placeholder="Search products..."
+                          className="w-full bg-accent/50 border-none rounded-none pl-10 pr-4 py-4 text-sm focus:ring-1 focus:ring-primary/20 placeholder:text-muted-foreground"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-8 bg-muted/20 border-t border-border/10 flex flex-col gap-4">
+                    <Link to="/login" className="text-[10px] uppercase tracking-[0.2em] font-bold text-center py-4 bg-primary text-on-primary">
+                      Member Login
                     </Link>
-                  ))}
+                    <p className="text-[10px] text-center text-muted-foreground tracking-widest">EST. 2024 • PREMIUM ATELIER</p>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>

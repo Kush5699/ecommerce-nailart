@@ -120,7 +120,7 @@ export default function ProductDetail() {
               </p>
               <div className="h-[1px] flex-grow bg-border/30"></div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-serif italic leading-tight tracking-tighter">
+            <h1 className="text-4xl md:text-6xl font-serif italic leading-tight tracking-tighter">
               {product.name}
             </h1>
             <p className="text-2xl font-light text-muted-foreground">₹{product.price.toLocaleString('en-IN')}</p>

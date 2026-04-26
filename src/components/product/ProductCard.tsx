@@ -48,7 +48,7 @@ export default function ProductCard({ id, name, price, image, category, isNew, i
             Limited Edition
           </Badge>
         )}
-        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-0 lg:translate-y-full lg:group-hover:translate-y-0 transition-transform duration-300">
           <button 
             onClick={handleAddToCart}
             className="w-full bg-primary text-on-primary py-3 text-[10px] uppercase tracking-[0.2em] font-bold shadow-xl hover:bg-primary/90 transition-all"
